@@ -1,0 +1,138 @@
+@import vars
+@import fonts
+@import libs
+
+.container_header, .container_footer
+	width: 90%
+	height: 70px
+	display: flex
+	align-items: center
+	margin: auto
+.container_search_tags
+	display: flex
+	align-items: center
+.search_tag
+	font-size: 16px
+	margin-right: 7px
+	cursor: pointer
+	font-weight: 600
+	color: $font-color-white
+.search_tag:hover
+	color: $main-color
+.container_logo
+	display: flex
+	// align-items: center
+	// justify-content: center
+.logo_icon
+	width: 26px
+	margin-right: 5px
+.logo_title
+	font-size: 26px
+.container_search_bg
+	height: 400px
+	background-position: center
+	background-size: cover
+	max-width: initial
+	background-image: url(../img/_src/bg-search.jpg)
+	display: flex
+	align-items: center
+.container_search
+	width: 70%
+	margin: auto
+.search_title
+	color: #fff
+	font-size: 40px
+input[type=search], select
+  width: 100%
+  padding: 8px 16px
+  margin: 8px 5px 8px 0
+  display: inline-block
+  border: 1px solid #ccc
+  box-sizing: border-box
+  max-width: 220px
+.btn_search
+	@include btn_submit
+.btn_search:hover, .event_card_btn:hover
+	opacity: 0.7
+
+
+ul, li
+  margin: 0
+  padding: 0
+  list-style: none
+.container_events
+	width: 1024px
+	margin: 20px auto
+	display: flex
+	flex-wrap: wrap
+	justify-content: space-between
+.event_card
+	display: flex
+	width: 30%
+	padding: 15px
+	border: 1px solid #dce3e7
+	margin-bottom: 30px
+.event_card_content
+	background-color: #fff
+	display: flex
+	flex-direction: column
+	width: 100%
+.event_card_location
+	flex: 1 0 auto
+	color: #94a1a8
+	padding-top: $card-padding-top
+.event_card_img
+	max-width: 100%
+	height: auto
+.event_card_title
+	color: $color-event-title
+	font-size: 22px
+	font-weight: 600
+	line-height: 1
+	padding-top: $card-padding-top
+.event_card_tag
+	font-size: 18px
+	// color: #555
+	padding-top: $card-padding-top
+.event_card_date
+	font-size: 20px
+	padding-top: $card-padding-top
+.event_card_btn
+	@include btn_submit
+	width: 100%
+	max-width: 100%
+	margin-top: 40px
+footer
+	background-color: #ACEBDB
+.container_footer
+	justify-content: center
+@media (max-width: 1050px)
+	.container_events
+		width: 95%
+	.event_card_title
+		font-size: 20px
+	.event_card_tag
+		font-size: 16px
+	.event_card_date
+		font-size: 18px
+@media (max-width: 768px)
+	.container_search
+		width: 100%
+		margin: auto 20px
+	.event_card_title
+		font-size: 18px
+		padding-top: $card-padding-top-mob
+	.event_card_tag
+		font-size: 14px
+		padding-top: $card-padding-top-mob
+	.event_card_date
+		font-size: 16px
+		padding-top: $card-padding-top-mob
+	.event_card_location
+		font-size: 14px
+		padding-top: $card-padding-top-mob
+	@media (max-width: 576px)
+		.container_events
+			flex-direction: column
+		.event_card
+			width: 100%
