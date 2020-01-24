@@ -1,3 +1,7 @@
+@import vars
+@import fonts
+@import libs
+
 .container_event_info
     width: 1054px
     margin: auto
@@ -12,7 +16,7 @@
     font-size: 40px
     font-weight: 700
     line-height: 1.4
-    color: #4a5570
+    color: $color-event-title
 .container_date_location
     display: flex
     justify-content: space-between
@@ -22,7 +26,7 @@
     width: 40%
 .item_date, .item_event_by
     font-size: 24px
-    color: #4a5570
+    color: $color-event-title
     font-weight: 700
 .item_tag, .item_location
     font-size: 22px
@@ -35,6 +39,7 @@
 .social_icon
     width: 30px
     margin-top: 10px
+    cursor: pointer
 .container_disc_price
     display: flex
     justify-content: space-between
@@ -49,4 +54,49 @@
 .buy_box_ticket
     font-size: 20px
     font-weight: 700
-    color: #4a5570
+    color: $color-event-title
+.buy_box_price
+    text-align: center
+    font-size: 40px
+    font-weight: 600
+    color: $color-event-title
+.buy_box_btn
+    @include btn_submit
+    max-width: 100%
+    width: 100%
+    padding: 15px
+    font-size: 22px
+.buy_box_btn:hover
+    opacity: 0.6
+hr
+    margin: 15px 0
+
+@media (max-width: 1060px)
+    .container_event_info
+        width: 95%
+@media (max-width: 768px)
+    .container_date_location
+        flex-direction: column
+    .item_date_location
+        width: 100%
+    .item_tag, .item_location
+        margin: 0
+    .social_icons
+        flex-direction: row
+        width: 100%
+        justify-content: center
+    .social_icon
+        margin: 15px 5px 0 5px
+    .container_disc_price
+        flex-direction: column-reverse
+    .buy_box, .event_description
+        width: 100%
+    @media (max-width: 576px)
+        .event_main_title
+            font-size: 30px
+        .item_date, .item_event_by
+            font-size: 20px
+        .item_location, .item_tag 
+            font-size: 18px
+        .buy_box_price
+            font-size: 35px
