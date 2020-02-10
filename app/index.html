@@ -14,6 +14,10 @@
 	<meta property="og:image" content="img/@1x/preview.jpg">
 	
 	<link rel="stylesheet" href="css/styles.min.css">
+	<link rel="stylesheet" href="css/pagination.css">
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/pagination.min.js"></script>
 
 </head>
 
@@ -28,14 +32,13 @@
 </header>
 <div class="container_search_bg">
 	<div class="container_search">
-		<h1 class="search_title">Find events</h1>
+		<h1 class="search_title">Поиск мероприятия</h1>
 		<div class="search_form_group">
-			<input type="search" placeholder="Event name">
+			<input id="event_name" type="search" placeholder="Название..">
 			<select id="city" name="city">
-				<option value="kiev">Kiev</option>
-				<option value="odessa">Odessa</option>
+				<option value="">Все города</option>
 			</select>
-			<input class="btn_search" type="submit" value="Submit">
+			<input class="btn_search" type="submit" value="Поиск">
 		</div>
 		<div class="container_search_tags">
 			<div class="search_tag">Webinar</div>
@@ -45,7 +48,7 @@
 	</div>
 </div>
 <ul class="container_events">
-	<li class="event_card">
+	<!-- <li class="event_card">
 	  <div class="event_card_content">
 		<img src="https://s3.amazonaws.com/attachments.ticketbud.com/events/vox1_main_images/543024/medium/Invitadada_Especial-8.png?1571362915" alt="" class="event_card_img">
 		<div class="event_card_title">Celebrate Educators Gadsden AL - January 25</div>
@@ -54,8 +57,11 @@
 		<div class="event_card_location">Europa Hotel belfast</div>
 		<input class="event_card_btn" type="submit" value="View event">
 	  </div>
-	</li>
+	</li> -->
 </ul>
+<!-- pagination -->
+<div id="pagination"></div>
+<!-- end pagination -->
 <footer>
 	<div class="container_footer">
 		<div class="container_logo">
