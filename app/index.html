@@ -28,7 +28,146 @@
 			<svg class="logo_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#d11d4e" d="M12 0l-11 6v12.131l11 5.869 11-5.869v-12.066l-11-6.065zm-1 21.2l-6.664-3.555 4.201-2.801c1.08-.719-.066-2.359-1.243-1.575l-4.294 2.862v-7.901l8 4.363v8.607zm-6.867-14.63l6.867-3.746v4.426c0 1.323 2 1.324 2 0v-4.415l6.91 3.811-7.905 4.218-7.872-4.294zm8.867 6.03l8-4.269v7.8l-4.263-2.842c-1.181-.785-2.323.855-1.245 1.574l4.172 2.781-6.664 3.556v-8.6z"/></svg>
 			<div class="logo_title">eventcatalog</div>
 		</div>
+		<div class="container_create_event">
+			<svg class="create_event_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#666" d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3.994 12.964l3.106 3.105-4.112.931 1.006-4.036zm9.994-3.764l-5.84 5.921-3.202-3.202 5.841-5.919 3.201 3.2z"/></svg>
+			<div class="create_event_text">Создать</div>
+		</div>
 	</div>
+	<!-- MODAL CREATE EVENT -->
+	<div class="container_modal">
+		<div class="modal_content">
+			
+			<div class="modal_header">
+				<div class="modal_title">Создание мероприятия</div>
+				<span class="close_modal">&times;</span>
+			</div>
+			<div class="modal_inputs">
+				<div class="form_group">
+					<label for="modal_event_name">Название мероприятия</label>
+					<input type="text" id="modal_event_name" placeholder="Название..">
+					<!-- <span class="error_msg">Поле "Название мероприятия" не должно быть пустым!</span> -->
+					<span id="error_title" class="error_msg"></span>
+				</div>
+				<div class="form_group">
+					<label for="modal_start_date">Дата начала мероприятия</label>
+					<input type="date" id="modal_start_date">
+					<span id="error_start_date" class="error_msg"></span>
+				</div>
+				<div class="form_group">
+					<label for="modal_end_date">Дата конца мероприятия</label>
+					<input type="date" id="modal_end_date">
+					<span id="error_end_date" class="error_msg"></span>
+				</div>
+				<div class="form_group">
+					<label for="modal_time">Время начала мероприятия</label>
+					<!-- <input type="text" onfocus="(this.type='time')" placeholder="Время началаюю" id="modal_time"> -->
+					<input type="time" id="modal_time">
+					<span id="error_time" class="error_msg"></span>
+				</div>
+				<div class="form_group">
+					<label for="modal_price">Цена мероприятия</label>
+					<input type="text" id="modal_price" placeholder="Цена..">
+					<span id="error_price" class="error_msg"></span>
+				</div>
+				<div class="form_group">
+					<label for="modal_category">Категория мероприятия</label>
+					<select id="modal_category" name="modal_category">
+						<option value="">Выберите категорию мероприятия</option>
+					</select>
+					<span id="error_category" class="error_msg"></span>
+				</div>
+				<div class="form_group">
+					<label for="modal_tags">Теги мероприятия</label>
+					<select id="modal_tags" name="modal_tags" multiple></select>
+					<span id="error_tags" class="error_msg"></span>
+				</div>
+				<div class="form_group">
+					<label for="modal_city">Город мероприятия</label>
+					<select id="modal_city" name="modal_city">
+						<option value="">Город мероприятия</option>
+					</select>
+					<span id="error_city" class="error_msg"></span>
+				</div>
+				<div class="form_group">
+					<label for="modal_address">Адрес мероприятия</label>
+					<input type="text" id="modal_address" placeholder="Название..">
+					<span id="error_address" class="error_msg"></span>
+				</div>
+				<div class="form_group">
+					<label for="modal_description">Описание мероприятия</label>
+					<textarea id="modal_description" placeholder="Описание.."></textarea>
+					<span id="error_description" class="error_msg"></span>
+				</div>
+				<div class="form_group">
+					<label for="modal_img">Главная картинка мероприятия</label>
+					<input type="file" id="modal_img" accept="image/*" onchange="getBase64()">
+					<span id="error_img" class="error_msg"></span>
+				</div>
+				<!-- <div class="form_group">
+					<label for="modal_organizer">Организатор мероприятия</label>
+					<input type="text" id="modal_organizer" placeholder="Организатор.." required>
+				</div> -->
+				<div class="form_group">
+					<label for="modal_url">Ссылка на покупку билета</label>
+					<input type="text" id="modal_url" placeholder="Ссылка..">
+					<span id="error_url" class="error_msg"></span>
+				</div>
+				<div class="modal_title">Данные для обратной связи</div>
+				<div class="form_group">
+					<label for="modal_client_name">Имя</label>
+					<input type="text" id="modal_client_name" placeholder="Введите имя..">
+					<span id="error_client_name" class="error_msg"></span>
+				</div>
+				<div class="form_group">
+					<label for="modal_client_email">Электронная почта</label>
+					<input type="email" id="modal_client_email" placeholder="Введите Email..">
+					<span id="error_client_email" class="error_msg"></span>
+				</div>
+				<div class="form_group">
+					<label for="modal_client_tel">Номер телефона</label>
+					<input type="text" id="modal_client_tel" placeholder="Введите номер телефон..">
+				</div>
+				<!-- <input id="submit_create_event" type="submit" value="Создать" onclick="getInputValue()"> -->
+				<!-- <!-- <button  id="submit_create_event" value="Создать" onclick="getInputValue()">Создать</button> -->
+				<button id="submit_create_event" value="Создать">Создать</button>
+			</div>
+		
+		</div>
+	</div>
+	<!-- END MODAL CREATE EVENT -->
+	<!-- MODAL MODERATION EVENT -->
+	<div class="container_modal_moderation">
+		<div class="modal_content_moderation">
+			<div class="modal_header">
+				<div class="modal_title">Мероприятие отправлено на модерацию!</div>
+				<span class="close_modal_moderation">&times;</span>
+			</div>
+			<div>После успешной модерации Ваше мероприятие появится на нашем сайте!</div>
+		</div>
+	</div>
+	<!-- END MODAL MODERATION EVENT -->
+	<!-- MODAL ERROR MODERATION EVENT -->
+	<div class="container_modal_error">
+		<div class="modal_content_error">
+			<div class="modal_header">
+				<div class="modal_title">Мероприятие не было создано!</div>
+				<span class="close_modal_error">&times;</span>
+			</div>
+			<div>Попробуйте создать мероприятие немного позже!</div>
+		</div>
+	</div>
+	<!-- END ERROR MODAL MODERATION EVENT -->
+	<!-- MODAL NOT FOUND EVENT -->
+	<div class="container_modal_notfound">
+		<div class="modal_content_notfound">
+			<div class="modal_header">
+				<div class="modal_title">Мероприятие не найдено!</div>
+				<span class="close_modal_notfound">&times;</span>
+			</div>
+			<div>По Вашему запросу мероприятие не найдено!</div>
+		</div>
+	</div>
+	<!-- END MODAL NOT FOUND EVENT -->
 </header>
 <div class="container_search_bg">
 	<div class="container_search">
@@ -72,6 +211,7 @@
 </footer>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src="js/scripts.min.js"></script>
+	<script src="js/modal-window.js"></script>
 
 </body>
 </html>

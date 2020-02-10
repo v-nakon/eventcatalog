@@ -1,6 +1,13 @@
 var searchName = document.querySelector("#event_name");
 var searchLocation = document.querySelector("#city");
+var modalNotFound = document.querySelector(".container_modal_notfound");
+var closeModalNotfound = document.querySelector(".close_modal_notfound");
 getCities("city");
+
+closeModalNotfound.addEventListener("click", function() {
+	modalNotFound.style.display = "none";
+	document.location.href = "/";
+  });
 
 let btnSearch = document.querySelector(".btn_search");
 btnSearch.addEventListener('click',() => searchTitleCity("event_name", "city"));
