@@ -14,6 +14,7 @@ axios.get('https://eventafisha.com/api/v1/events/' + idEvent)
     setBuyLink(response.data);
     setDescription(response.data);
     setImg(response.data);
+    setCategory(response.data);
   })
   .catch(function (error) {
     // handle error
@@ -62,3 +63,8 @@ axios.get('https://eventafisha.com/api/v1/events/' + idEvent)
      let imgElement = document.querySelector(".event_img");
      imgElement.src = "https://eventafisha.com/storage/" + imgPath;
  }
+ function setCategory(obj) {
+    let category = obj.category.title;
+    let categoryElement = document.querySelector(".item_tag");
+    categoryElement.innerHTML = category;
+}
