@@ -148,3 +148,21 @@ function paginationAjax(name, title, city, date, category) {
 	  }
 	})
   };
+
+  $(function(){
+	$('.datepicker-start').datepicker({
+	   onSelect: function (dateText, inst) {
+		  console.log(dateText)
+	   },
+	   minDate: new Date()
+	});
+ });
+
+ $(function(){
+	$('.datepicker-end').datepicker({
+	   onSelect: function (dateText, inst) {
+		  console.log(dateText)
+	   },
+	   minDate: new Date()
+	});
+ });

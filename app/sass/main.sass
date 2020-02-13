@@ -81,7 +81,7 @@ header
 .search_title
 	color: #fff
 	font-size: 40px
-.search_form_group #event_name, .search_form_group #city
+.search_form_group #event_name, .search_form_group #city, .search_form_group input[type=text]
   width: 100%
   padding: 8px 16px
   margin: 8px 5px 8px 0
@@ -147,6 +147,11 @@ footer
     display: flex
     justify-content: center
     padding: 0 0 30px 0
+.datepicker--day-name, .datepicker--cell.-current-
+    color: $main-color !important
+.datepicker--cell.-selected-
+	background: #E5EAEE !important
+	color: black !important
 // MODAL CREATE EVENT
 /* The Modal (background) */
 .container_modal, .container_modal_moderation, .container_modal_error, .container_modal_notfound
@@ -230,6 +235,8 @@ footer
 	.container_search
 		width: 100%
 		margin: auto 20px
+	.search_title
+		font-size: 32px
 	.event_card_title
 		font-size: 18px
 		padding-top: $card-padding-top-mob
