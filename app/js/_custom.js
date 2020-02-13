@@ -2,6 +2,8 @@ var searchName = document.querySelector("#event_name");
 var searchLocation = document.querySelector("#city");
 var modalNotFound = document.querySelector(".container_modal_notfound");
 var closeModalNotfound = document.querySelector(".close_modal_notfound");
+var datepickerStart = "";
+var datepickerEnd = "";
 getCities("city");
 
 closeModalNotfound.addEventListener("click", function() {
@@ -10,7 +12,7 @@ closeModalNotfound.addEventListener("click", function() {
   });
 
 let btnSearch = document.querySelector(".btn_search");
-btnSearch.addEventListener('click',() => searchTitleCity("event_name", "city"));
+btnSearch.addEventListener('click',() => searchEvent("event_name", "city", datepickerStart, datepickerEnd));
 
 function viewEvent(id) {
 	console.log("ID", id);
@@ -25,7 +27,7 @@ function createEventCard(objItem) {
 	<div class="event_card_content">
 	  <img src="https://eventafisha.com/storage/` + objItem.images + `" alt="" class="event_card_img">
 	  <div class="event_card_title">` + objItem.title + `</div>
-	  <div class="event_card_tag">Webinar</div>
+	  <div class="event_card_tag">` + objItem.category.title + `</div>
 	  <div class="event_card_date">` + new Date(objItem.start_date).toLocaleDateString() + `</div>
 	  <div class="event_card_location">` + objItem.address + `</div>
 	  <input class="event_card_btn" type="submit" value="View event" onclick="viewEvent(`+ objItem.id +`)">
@@ -63,11 +65,11 @@ function addOptionSelect(item, elementSelect) {
   }
 
 // для поиска по названию/городу
-function searchTitleCity(titleEl, cityEl) {
+function searchEvent(titleEl, cityEl, dateStart, dateEnd) {
 	let nameEvent = document.getElementById(titleEl).value;
 	let cityEvent = document.getElementById(cityEl).value;
 	// searchRequest(nameEvent, cityEvent);
-	paginationAjax('#pagination', nameEvent, cityEvent, "", "");
+	paginationAjax('#pagination', nameEvent, cityEvent, dateStart, dateEnd, "");
 }
 function removeEventList() {
 	var listEventEl = document.querySelector(".container_events");
@@ -77,10 +79,10 @@ function removeEventList() {
 }
 
 $(function() {
-	paginationAjax('#pagination', '', '', '', '');
+	paginationAjax('#pagination', '', '', '', '', '');
 });
 
-function checkSearchParam(title, city, date, category) {
+function checkSearchParam(title, city, dateStart, dateEnd, category) {
 	let link = "https://eventafisha.com/api/v1/events?";
 	if(title !== "") {
 		link += "&title=" + title;
@@ -88,8 +90,11 @@ function checkSearchParam(title, city, date, category) {
 	if(city !== "") {
 		link += "&city_id=" + city;
 	}
-	if(date !== "") {
-		link += "&date=" + date;
+	if(dateStart !== "") {
+		link += "&date_start=" + dateStart;
+	}
+	if(dateEnd !== "") {
+		link += "&date_end=" + dateEnd;
 	}
 	if(category !== "") {
 		link += "&category_id=" + category;
@@ -97,8 +102,8 @@ function checkSearchParam(title, city, date, category) {
 	return link;
 };
 
-function paginationAjax(name, title, city, date, category) {
-	let url = checkSearchParam(title, city, date, category);
+function paginationAjax(name, title, city, dateStart, dateEnd, category) {
+	let url = checkSearchParam(title, city, dateStart, dateEnd, category);
 	var container = $(name);
 	container.pagination({
 	  dataSource: url,
@@ -139,6 +144,8 @@ function paginationAjax(name, title, city, date, category) {
 		}
 		searchName.value = "";
 		searchLocation.value = "";
+		datepickerStart = "";
+		datepickerEnd = "";
 		
 		// if (window.matchMedia("(max-width: 768px)").matches){
 		// 	hideSearch();
@@ -152,7 +159,8 @@ function paginationAjax(name, title, city, date, category) {
   $(function(){
 	$('.datepicker-start').datepicker({
 	   onSelect: function (dateText, inst) {
-		  console.log(dateText)
+		//   console.log(dateText)
+		  datepickerStart = dateText;
 	   },
 	   minDate: new Date()
 	});
@@ -161,7 +169,8 @@ function paginationAjax(name, title, city, date, category) {
  $(function(){
 	$('.datepicker-end').datepicker({
 	   onSelect: function (dateText, inst) {
-		  console.log(dateText)
+		//   console.log(dateText)
+		  datepickerEnd = dateText;
 	   },
 	   minDate: new Date()
 	});

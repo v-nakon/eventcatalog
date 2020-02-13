@@ -29,7 +29,7 @@ textarea
 .form_group input[type=submit]
     @include input_submit
     width: 100%
-input[type=submit]:hover
+#submit_create_event:hover
   	opacity: 0.5
 .form_group
 	display: flex
@@ -91,7 +91,9 @@ header
   max-width: 220px
 .search_form_group .btn_search
 	@include btn_submit
-.btn_search:hover, .event_card_btn:hover
+.btn_search:hover
+	background-color: #961528
+.event_card_btn:hover
 	opacity: 0.7
 ul, li
   margin: 0
@@ -249,6 +251,14 @@ footer
 	.event_card_location
 		font-size: 14px
 		padding-top: $card-padding-top-mob
+	.modal_content
+		width: 90%
+	#submit_create_event
+		width: 40%
+	textarea
+		height: 100px
+	.modal_content_moderation, .modal_content_error, .modal_content_notfound
+		width: 90%
 	@media (max-width: 576px)
 		.container_events
 			flex-direction: column
