@@ -110,10 +110,10 @@ function paginationAjax(name, title, city, dateStart, dateEnd, category) {
 	  locator: 'data',
 	  totalNumberLocator: function(dataSource) {
 		// you can return totalNumber by analyzing response content
-		console.log("test", dataSource.pagination.total)
-		return dataSource.pagination.total;
+		console.log("test", dataSource.total)
+		return dataSource.total;
 	},
-	  pageSize: 15,
+	  pageSize: 20,
 	  showPageNumbers: true,
 	  showPrevious: true,
 	  showNext: true,
