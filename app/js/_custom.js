@@ -30,7 +30,7 @@ function createEventCard(objItem) {
 	  <div class="event_card_tag">` + objItem.category.title + `</div>
 	  <div class="event_card_date">` + new Date(objItem.start_date).toLocaleDateString() + `</div>
 	  <div class="event_card_location">` + objItem.address + `</div>
-	  <input class="event_card_btn" type="submit" value="View event" onclick="viewEvent(`+ objItem.id +`)">
+	  <input class="event_card_btn" type="submit" value="Посмотреть" onclick="viewEvent(`+ objItem.id +`)">
 	</div>`;
 	// console.log(test);
 
@@ -83,7 +83,7 @@ $(function() {
 });
 
 function checkSearchParam(title, city, dateStart, dateEnd, category) {
-	let link = "https://eventafisha.com/api/v1/events?";
+	let link = "https://eventafisha.com/api/v1/events?paginate=";
 	if(title !== "") {
 		link += "&title=" + title;
 	}
@@ -131,9 +131,9 @@ function paginationAjax(name, title, city, dateStart, dateEnd, category) {
 		// }
 	  },
 	  callback: function(response, pagination) {
-		window.console && console.log(22, response, pagination.pageNumber);
-		console.log(pagination.pageNumber);
-		console.log("res len", response.length);
+		// window.console && console.log(22, response, pagination.pageNumber);
+		// console.log(pagination.pageNumber);
+		// console.log("res len", response.length);
 		if(response.length === 0) {
 			modalNotFound.style.display = "block";
 		} else {
