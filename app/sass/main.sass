@@ -82,6 +82,10 @@ header
 .search_title
 	color: #fff
 	font-size: 40px
+.search_form_group
+	display: flex
+	flex-wrap: wrap
+	align-items: center
 .search_form_group #event_name, .search_form_group #city, .search_form_group input[type=text]
   width: 100%
   padding: 8px 16px
@@ -90,6 +94,8 @@ header
   border: 1px solid #ccc
   box-sizing: border-box
   max-width: 220px
+.search_form_group #city
+	margin: 8px 20px 8px 0
 .search_form_group .btn_search
 	@include btn_submit
 .btn_search:hover
@@ -158,12 +164,23 @@ footer
 .datepicker--cell.-selected-
 	background: #E5EAEE !important
 	color: black !important
+.datepicker--pointer
+	display: none !important
+.datepicker--time-row input[type='range']:focus::-webkit-slider-thumb
+    background: $main-color !important
+    border-color: $main-color !important
+.datepicker--time-row input[type='range']:focus::-moz-range-thumb
+    background: $main-color !important
+    border-color: $main-color !important
+.datepicker--time-row input[type='range']:focus::-ms-thumb
+    background: $main-color !important
+    border-color: $main-color !important
 // MODAL CREATE EVENT
 /* The Modal (background) */
 .container_modal, .container_modal_moderation, .container_modal_error, .container_modal_notfound
     display: none
     position: fixed
-    z-index: 99999999
+    z-index: 1
     padding-top: 50px
     left: 0
     top: 0
@@ -228,6 +245,18 @@ footer
     font-weight: 600
     font-size: 14px
     color: #666
+.datepicker_btn
+	// background-color: red
+	cursor: pointer
+.datepicker_group
+	display: flex
+.datepicker_input
+	border: none !important
+	height: 15px
+	width: 60px
+	font-size: 16px
+	color: white
+	background-color:rgba(0, 0, 0, 0) !important
 @media (max-width: 1050px)
 	.container_events
 		width: 95%
@@ -237,10 +266,10 @@ footer
 		font-size: 16px
 	.event_card_date
 		font-size: 18px
-@media (max-width: 768px)
 	.container_search
 		width: 100%
 		margin: auto 20px
+@media (max-width: 768px)
 	.search_title
 		font-size: 32px
 	.event_card_title

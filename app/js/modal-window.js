@@ -101,10 +101,12 @@ function getCities() {
     });
 };
 function createEvent() {
+  let newStartDate = dateForRequest(startDateEvent);
+  let newEndDate = dateForRequest(endDateEvent);
   axios.post('https://eventafisha.com/api/v1/events', {
         title: nameEvent,
-        start_date: startDateEvent,
-        end_date: endDateEvent,
+        start_date: newStartDate,
+        end_date: newEndDate,
         time: timeEvent,
         address: addressEvent,
         cost: priceEvent,
@@ -150,9 +152,9 @@ function getBase64() {
 };
 function getModalInputs() {
   nameEvent = document.querySelector("#modal_event_name").value;
-  startDateEvent = document.querySelector("#modal_start_date").value;
-  endDateEvent = document.querySelector("#modal_end_date").value;
-  timeEvent = document.querySelector("#modal_time").value;
+  // startDateEvent = document.querySelector("#modal_start_date").value;
+  // endDateEvent = document.querySelector("#modal_end_date").value;
+  // timeEvent = document.querySelector("#modal_time").value;
   priceEvent = document.querySelector("#modal_price").value;
   categoryEvent = document.querySelector("#modal_category").value;
   tagsElement = document.querySelector("#modal_tags");
@@ -180,7 +182,16 @@ function validateDate(value) {
   } else {
     return false;
   }
-}
+};
+function dateForRequest(date) {
+  if(date !== '') {
+    let arr = date.split(".");
+    let newDate = arr[2] + '-' + arr[1] + '-' + arr[0];
+    console.log(newDate);
+    return newDate;
+  }
+  return date;
+};
 function inputsValidation() {
   let errorTitle = document.querySelector("#error_title");
   let errorStartDate = document.querySelector("#error_start_date");
@@ -200,7 +211,7 @@ function inputsValidation() {
   } else {
     errorTitle.innerHTML = '';
   }
-  if(validateDate(new Date(startDateEvent).toLocaleDateString())) {
+  if(validateDate(startDateEvent)) {
     errorStartDate.innerHTML = '';
   } else {
     errorStartDate.innerHTML = 'Поле "Дата начала мероприятия" пустое или имеет не правильный формат!';
@@ -268,3 +279,32 @@ function inputsValidation() {
   }
   createEvent();
 };
+
+
+$(function(){
+	$('.datepicker_event_start').datepicker({
+	   onSelect: function (dateText, inst) {
+      startDateEvent = dateText;
+	   },
+     minDate: new Date(),
+     autoClose: true
+	});
+ });
+
+ $(function(){
+	$('.datepicker_event_end').datepicker({
+	   onSelect: function (dateText, inst) {
+      endDateEvent = dateText;
+	   },
+     minDate: new Date(),
+     autoClose: true
+	});
+ });
+ $('.datepicker_time').datepicker({
+  timepicker: true,
+  onlyTimepicker: true,
+  classes: 'only-timepicker',
+  onSelect: function (dateText, inst) {
+        timeEvent = dateText;
+    	   },
+});

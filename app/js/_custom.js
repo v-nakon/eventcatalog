@@ -26,7 +26,7 @@ function createEventCard(objItem) {
 	`
 	<div class="event_card_content">
 	  <img src="https://eventafisha.com/storage/` + objItem.images + `" alt="" class="event_card_img">
-	  <div class="event_card_title">` + objItem.title + `</div>
+	  <div class="event_card_title">` + sliceText(objItem.title) + `</div>
 	  <div class="event_card_tag">` + objItem.category.title + `</div>
 	  <div class="event_card_date">` + new Date(objItem.start_date).toLocaleDateString() + `</div>
 	  <div class="event_card_location">` + objItem.address + `</div>
@@ -141,6 +141,7 @@ function paginationAjax(name, title, city, dateStart, dateEnd, category) {
 			$.each(response, function (index, item) {
 				createEventCard(item);
 			});
+			window.scrollTo(0, 0);
 		}
 		searchName.value = "";
 		searchLocation.value = "";
@@ -156,22 +157,31 @@ function paginationAjax(name, title, city, dateStart, dateEnd, category) {
 	})
   };
 
-  $(function(){
-	$('.datepicker-start').datepicker({
-	   onSelect: function (dateText, inst) {
-		//   console.log(dateText)
-		  datepickerStart = dateText;
-	   },
-	   minDate: new Date()
-	});
- });
+  function sliceText(text) {
+	let sliced = text.replace(/<\/?[^>]+>/g,'');
+	sliced = sliced.slice(0,60);
+	if (sliced.length < text.length) {
+		sliced += '...';
+	}
+	return sliced;
+};
 
- $(function(){
-	$('.datepicker-end').datepicker({
-	   onSelect: function (dateText, inst) {
-		//   console.log(dateText)
-		  datepickerEnd = dateText;
-	   },
-	   minDate: new Date()
-	});
- });
+// search datepicker
+let $btn = $('.datepicker_btn'),
+	$input = $('#dp'),
+	dp = $input.datepicker({
+		showEvent: 'none',
+		range: true,
+		
+		onSelect: function (dateText, inst) {
+		   console.log(dateText)
+		   datepickerStart = dateText;
+		},
+		minDate: new Date()
+	}).data('datepicker');
+  
+  $btn.on('click', function(){
+	  dp.show();
+	  dp.clear();
+  	  $input.focus();
+  });
