@@ -2,9 +2,8 @@ var searchName = document.querySelector("#event_name");
 var searchLocation = document.querySelector("#city");
 var modalNotFound = document.querySelector(".container_modal_notfound");
 var closeModalNotfound = document.querySelector(".close_modal_notfound");
-var datepickerStart = "";
-var datepickerEnd = "";
 getCities("city");
+getCategories();
 
 closeModalNotfound.addEventListener("click", function() {
 	modalNotFound.style.display = "none";
@@ -12,7 +11,7 @@ closeModalNotfound.addEventListener("click", function() {
   });
 
 let btnSearch = document.querySelector(".btn_search");
-btnSearch.addEventListener('click',() => searchEvent("event_name", "city", datepickerStart, datepickerEnd));
+btnSearch.addEventListener('click',() => searchEvent("event_name", "city"));
 
 function viewEvent(id) {
 	console.log("ID", id);
@@ -56,6 +55,50 @@ function getCities(elementSelect) {
       // always executed
     });
 };
+function getCategories() {
+    axios.get('https://eventafisha.com/api/v1/categories')
+    .then(function (response) {
+      for(let item in response.data) {
+		addCatToSearch(response.data[item], ".container_category");
+      };
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
+};
+// categories for search
+function addCatToSearch(item, elementTo) {
+	// console.log(item);
+	let catElements = document.querySelector(elementTo);
+	let newCat = document.createElement("div");
+	newCat.classList.add("item_category");
+    newCat.setAttribute('category_id', item.id);
+    newCat.innerHTML = item.title;
+	catElements.appendChild(newCat);
+	addEventToElement(newCat, item.id);
+};
+function addEventToElement(element, catId) {
+	element.addEventListener("click", function(){
+		delActiveColor();
+		console.log("CAT - ", catId);
+		element.classList.add("color_active_cat");
+		document.querySelector(".arrow_down").classList.add("color_active_cat");
+		categorySearch = catId;
+	});
+};
+function delActiveColor() {
+	let arrActiveColor = document.querySelectorAll(".color_active_cat");
+	console.log("arr", arrActiveColor)
+	arrActiveColor.forEach(function(el){
+		el.classList.remove("color_active_cat");
+		// console.log("delete class")
+	})
+};
+// end categories for search
 function addOptionSelect(item, elementSelect) {
     let selectCategory = document.getElementById(elementSelect);
     let option = document.createElement("option");
@@ -64,12 +107,46 @@ function addOptionSelect(item, elementSelect) {
     selectCategory.add(option);
   }
 
-// для поиска по названию/городу
-function searchEvent(titleEl, cityEl, dateStart, dateEnd) {
-	let nameEvent = document.getElementById(titleEl).value;
-	let cityEvent = document.getElementById(cityEl).value;
+// search function
+var fromDateSearch = '';
+var toDateSearch = '';
+var nameEventSearch = '';
+var cityEventSearch = '';
+var categorySearch = '';
+
+var elCatAll = document.querySelector("#search_cat_all");
+var elCatMain1 = document.querySelector("#search_cat_main1");
+var elCatMain2 = document.querySelector("#search_cat_main2");
+
+elCatAll.addEventListener("click", function(){
+	delActiveColor();
+	elCatAll.classList.add("color_active_cat");
+	categorySearch = '';
+});
+elCatMain1.addEventListener("click", function(){
+	delActiveColor();
+	elCatMain1.classList.add("color_active_cat");
+	categorySearch = 4;
+});
+elCatMain2.addEventListener("click", function(){
+	delActiveColor();
+	elCatMain2.classList.add("color_active_cat");
+	categorySearch = 5;
+});
+function splitSearchDate(dates) {
+	if (dates.indexOf(' - ') > -1) {
+		let dateArr = dates.split(' - ');
+		fromDateSearch = dateArr[0];
+		toDateSearch = dateArr[1];
+		} else {
+			fromDateSearch = dates;
+		}
+};
+function searchEvent(titleEl, cityEl) {
+	nameEventSearch = document.getElementById(titleEl).value;
+	cityEventSearch = document.getElementById(cityEl).value;
 	// searchRequest(nameEvent, cityEvent);
-	paginationAjax('#pagination', nameEvent, cityEvent, dateStart, dateEnd, "");
+	paginationAjax('#pagination', nameEventSearch, cityEventSearch, fromDateSearch, toDateSearch, categorySearch);
 }
 function removeEventList() {
 	var listEventEl = document.querySelector(".container_events");
@@ -113,7 +190,7 @@ function paginationAjax(name, title, city, dateStart, dateEnd, category) {
 		console.log("test", dataSource.total)
 		return dataSource.total;
 	},
-	  pageSize: 20,
+	  pageSize: 24,
 	  showPageNumbers: true,
 	  showPrevious: true,
 	  showNext: true,
@@ -143,10 +220,8 @@ function paginationAjax(name, title, city, dateStart, dateEnd, category) {
 			});
 			window.scrollTo(0, 0);
 		}
-		searchName.value = "";
-		searchLocation.value = "";
-		datepickerStart = "";
-		datepickerEnd = "";
+		// searchName.value = "";
+		// searchLocation.value = "";
 		
 		// if (window.matchMedia("(max-width: 768px)").matches){
 		// 	hideSearch();
@@ -174,8 +249,7 @@ let $btn = $('.datepicker_btn'),
 		range: true,
 		
 		onSelect: function (dateText, inst) {
-		   console.log(dateText)
-		   datepickerStart = dateText;
+		   splitSearchDate(dateText);
 		},
 		minDate: new Date()
 	}).data('datepicker');
@@ -185,3 +259,24 @@ let $btn = $('.datepicker_btn'),
 	  dp.clear();
   	  $input.focus();
   });
+
+ // Open the dropdown window CATEGORY
+ var catWindow = document.querySelector(".dropdown_content");
+ var containerCatWindow = document.querySelector(".container_category");
+ var btnShowCat = document.querySelector(".dropbtn");
+
+
+//   btnShowCat.addEventListener("click", function() {
+//     catWindow.style.display = "block";
+//   });
+btnShowCat.addEventListener("click", function() {
+   catWindow.classList.toggle("show");
+   });
+ // Close the dropdown if the user clicks outside of it CATEGORY
+ window.onclick = function(event) {
+   if (!event.target.matches('.dropbtn') && !event.target.matches('.container_category') && !event.target.matches('.item_category')) {
+	   if (catWindow.classList.contains('show')) {
+		   catWindow.classList.remove('show');
+	   }
+   }
+ };

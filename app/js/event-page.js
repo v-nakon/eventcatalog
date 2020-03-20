@@ -15,6 +15,7 @@ axios.get('https://eventafisha.com/api/v1/events/' + idEvent)
     setDescription(response.data);
     setImg(response.data);
     setCategory(response.data);
+    setPromo(response.data);
   })
   .catch(function (error) {
     // handle error
@@ -67,4 +68,9 @@ axios.get('https://eventafisha.com/api/v1/events/' + idEvent)
     let category = obj.category.title;
     let categoryElement = document.querySelector(".item_tag");
     categoryElement.innerHTML = category;
+}
+function setPromo(obj) {
+    let promo = obj.promo;
+    let promoElement = document.querySelector(".item_event_promo");
+    promoElement.innerHTML = "Промокод: " + promo;
 }
