@@ -110,6 +110,7 @@ ul, li
   list-style: none
 .container_events
 	width: 1024px
+	min-height: 100vh
 	margin: 20px auto 0 auto
 	display: flex
 	flex-wrap: wrap
@@ -318,6 +319,35 @@ footer
 	color: $main-color !important
 	border-color: $main-color
 //end drop-down category
+// start block spinner
+.block_spinner
+	position: fixed
+	top: 65%
+	left: calc(50% - 4em)
+	height: 1000px
+.hide_spinner
+    display: none
+.spinner
+    width: 4rem
+    height: 4rem
+    border-top-color: #999
+    border-left-color: #999
+    animation: spinner 400ms linear infinite
+    border-bottom-color: transparent
+    border-right-color: transparent
+    border-style: solid
+    border-width: 5px
+    border-radius: 50%  
+    box-sizing: border-box
+    display: inline-block
+    vertical-align: middle
+    animation: spinner 1s linear infinite
+@keyframes spinner
+    0% 
+        transform: rotate(0deg)
+    100%
+        transform: rotate(360deg)
+// start block spinner
 @media (max-width: 1050px)
 	.container_events
 		width: 95%
@@ -383,3 +413,9 @@ footer
 		.event_card_img
 			max-width: 200px
 			margin: auto
+		.block_spinner
+			left: calc( 50% -  1.5em)
+		.spinner
+			width: 2.5rem
+			height: 2.5rem
+			border-width: 2px
