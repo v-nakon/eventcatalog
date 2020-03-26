@@ -147,7 +147,11 @@ var arrElCat = [
   },
   {
     el: document.querySelector("#search_cat_main2"),
-    id: 5
+    id: 20
+  },
+  {
+    el: document.querySelector("#search_cat_main3"),
+    id: 21
   }
 ];
 function addListenerToArrEl(arr) {
