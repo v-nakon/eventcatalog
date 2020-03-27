@@ -6,7 +6,7 @@ console.log(idEvent);
 axios
   .get("https://eventafisha.com/api/v1/events/" + idEvent)
   .then(function(response) {
-    console.log(response.data);
+    document.title = response.data.title;
     setTitle(response.data);
     setDate(response.data);
     setLocation(response.data);
