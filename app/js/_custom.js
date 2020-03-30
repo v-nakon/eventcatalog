@@ -143,15 +143,15 @@ var arrElCat = [
   },
   {
     el: document.querySelector("#search_cat_main1"),
-    id: 4
+    id: 24
   },
   {
     el: document.querySelector("#search_cat_main2"),
-    id: 20
+    id: 1
   },
   {
     el: document.querySelector("#search_cat_main3"),
-    id: 21
+    id: 2
   }
 ];
 function addListenerToArrEl(arr) {

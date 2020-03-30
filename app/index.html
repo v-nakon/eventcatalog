@@ -224,6 +224,53 @@
         </div>
       </div>
       <!-- END MODAL NOT FOUND EVENT -->
+      <!-- MODAL ERROR MESSSAGE -->
+      <div class="container_modal_report">
+        <div class="modal_content_report">
+          <div class="modal_header">
+            <div class="modal_title">
+              Нашли ошибку или неточность на сайте? Сообщите нам!
+            </div>
+            <span class="close_modal_report">&times;</span>
+          </div>
+          <div>
+            <div class="form_group">
+              <label class="report_label" for="modal_report_email"
+                >Email для обратной связи <span>*</span></label
+              >
+              <input
+                type="email"
+                id="modal_report_email"
+                placeholder="Введите Email.."
+              />
+              <span id="error_report_email" class="error_msg"></span>
+            </div>
+            <label for="modal_is_organizer">Вы организатор?</label>
+            <input type="checkbox" id="modal_is_organizer" />
+
+            <div class="form_group">
+              <label class="report_label" for="modal_report_description"
+                >Сообщение об ошибке <span>*</span></label
+              >
+              <textarea
+                id="modal_report_description"
+                placeholder="Сообщите об ошибке или неточности.."
+              ></textarea>
+              <span id="error_report_description" class="error_msg"></span>
+            </div>
+            <button id="submit_sent_report">Отправить</button>
+            <div class="report_success">
+              <p>Спасибо!</p>
+              <p>Ваше сообщение успешно отправлено.</p>
+            </div>
+            <div class="report_error">
+              <p>Ваше сообщение не отправлено.</p>
+              <p>Попробуйте позже!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END MODAL ERROR MESSAGE -->
     </header>
     <div class="container_search_bg">
       <div class="container_search">
@@ -310,9 +357,11 @@
           <div class="logo_title">eventerra</div>
         </div>
       </div>
+      <div class="btn_report_error">Сообщить об ошибке</div>
     </footer>
     <script src="js/axios.min.js"></script>
     <script src="js/scripts.min.js"></script>
     <script src="js/modal-window.js"></script>
+    <script src="js/report_msg.js"></script>
   </body>
 </html>

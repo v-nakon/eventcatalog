@@ -58,18 +58,30 @@ function setBuyLink(obj) {
   let buyLink = obj.buy_link;
   let price = obj.cost;
   let buyBtn = document.querySelector(".buy_box_btn");
+  let id = obj.id;
+  let redirectLink = "https://eventafisha.com/events/" + id + "/redirect-page";
   if (buyLink === null && price == 0) {
     document.querySelector(".buy_box").classList.add("hide_element");
   } else if (buyLink === null) {
     buyBtn.classList.add("hide_element");
   } else {
-    buyBtn.addEventListener("click", () => window.open(buyLink));
+    buyBtn.addEventListener("click", () => window.open(redirectLink));
   }
 }
 function setDescription(obj) {
   let description = obj.desc;
-  let descriptionElement = document.querySelector(".event_description");
-  descriptionElement.innerHTML = description;
+  let description_first = obj.description_first;
+  let description_second = obj.description_second;
+  console.log(description_first + " " + description_second);
+  if (description_first !== null || description_first !== null) {
+    let descriptionElement1 = document.querySelector(".description_first");
+    descriptionElement1.innerHTML = description_first;
+    let descriptionElement2 = document.querySelector(".description_second");
+    descriptionElement2.innerHTML = description_second;
+  } else {
+    let descriptionElement = document.querySelector(".event_description");
+    descriptionElement.innerHTML = description;
+  }
 }
 function setImg(obj) {
   let imgPath = obj.images;
