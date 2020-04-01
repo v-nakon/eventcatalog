@@ -5,6 +5,7 @@ var closeModalNotfound = document.querySelector(".close_modal_notfound");
 var spinner = document.querySelector(".block_spinner");
 getCities("city");
 getCategories();
+getSubjects();
 
 closeModalNotfound.addEventListener("click", function() {
   modalNotFound.style.display = "none";
@@ -12,10 +13,12 @@ closeModalNotfound.addEventListener("click", function() {
 });
 
 let btnSearch = document.querySelector(".btn_search");
-btnSearch.addEventListener("click", () => searchEvent("event_name", "city"));
+btnSearch.addEventListener("click", () =>
+  searchEvent("event_name", "city", "subject_search")
+);
 
 function viewEvent(id) {
-  console.log("ID", id);
+  // console.log("ID", id);
   console.log(window.location.href);
   let urlEvent = window.location.href + "event-page.html?id=" + id;
   window.open(urlEvent);
@@ -69,6 +72,22 @@ function getCities(elementSelect) {
       // always executed
     });
 }
+function getSubjects() {
+  axios
+    .get("https://eventafisha.com/api/v1/subjects")
+    .then(function(response) {
+      for (let item in response.data) {
+        addOptionSelect(response.data[item], "subject_search");
+      }
+    })
+    .catch(function(error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function() {
+      // always executed
+    });
+}
 function getCategories() {
   axios
     .get("https://eventafisha.com/api/v1/categories")
@@ -109,7 +128,8 @@ function addEventToElement(element, catId) {
       cityEventSearch,
       fromDateSearch,
       toDateSearch,
-      categorySearch
+      categorySearch,
+      subjectSearch
     );
   });
 }
@@ -136,6 +156,7 @@ var toDateSearch = "";
 var nameEventSearch = "";
 var cityEventSearch = "";
 var categorySearch = "";
+var subjectSearch = "";
 var arrElCat = [
   {
     el: document.querySelector("#search_cat_all"),
@@ -166,7 +187,8 @@ function addListenerToArrEl(arr) {
         cityEventSearch,
         fromDateSearch,
         toDateSearch,
-        categorySearch
+        categorySearch,
+        subjectSearch
       );
     });
   }
@@ -182,9 +204,10 @@ function splitSearchDate(dates) {
     fromDateSearch = dates;
   }
 }
-function searchEvent(titleEl, cityEl) {
+function searchEvent(titleEl, cityEl, subjectEl) {
   nameEventSearch = document.getElementById(titleEl).value;
   cityEventSearch = document.getElementById(cityEl).value;
+  subjectSearch = document.getElementById(subjectEl).value;
   // searchRequest(nameEvent, cityEvent);
   paginationAjax(
     "#pagination",
@@ -192,7 +215,8 @@ function searchEvent(titleEl, cityEl) {
     cityEventSearch,
     fromDateSearch,
     toDateSearch,
-    categorySearch
+    categorySearch,
+    subjectSearch
   );
 }
 function removeEventList() {
@@ -203,10 +227,10 @@ function removeEventList() {
 }
 
 $(function() {
-  paginationAjax("#pagination", "", "", "", "", "");
+  paginationAjax("#pagination", "", "", "", "", "", "");
 });
 
-function checkSearchParam(title, city, dateStart, dateEnd, category) {
+function checkSearchParam(title, city, dateStart, dateEnd, category, subject) {
   let link = "https://eventafisha.com/api/v1/events?paginate=";
   if (title !== "") {
     link += "&title=" + title;
@@ -223,11 +247,29 @@ function checkSearchParam(title, city, dateStart, dateEnd, category) {
   if (category !== "") {
     link += "&category_id=" + category;
   }
+  if (subject !== "") {
+    link += "&subject_id=" + subject;
+  }
   return link;
 }
 
-function paginationAjax(name, title, city, dateStart, dateEnd, category) {
-  let url = checkSearchParam(title, city, dateStart, dateEnd, category);
+function paginationAjax(
+  name,
+  title,
+  city,
+  dateStart,
+  dateEnd,
+  category,
+  subject
+) {
+  let url = checkSearchParam(
+    title,
+    city,
+    dateStart,
+    dateEnd,
+    category,
+    subject
+  );
   var container = $(name);
   container.pagination({
     dataSource: url,

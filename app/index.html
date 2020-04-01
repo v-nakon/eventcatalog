@@ -18,6 +18,10 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/pagination.min.js"></script>
     <script src="js/datepicker.js"></script>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
   </head>
 
   <body>
@@ -104,12 +108,21 @@
               <input type="text" id="modal_price" placeholder="Цена.." />
               <span id="error_price" class="error_msg"></span>
             </div>
-            <div class="form_group">
-              <label for="modal_category">Категория мероприятия</label>
-              <select id="modal_category" name="modal_category">
-                <option value="">Выберите категорию мероприятия</option>
-              </select>
-              <span id="error_category" class="error_msg"></span>
+            <div class="blocks_group">
+              <div class="form_group">
+                <label for="modal_category">Категория мероприятия</label>
+                <select id="modal_category" name="modal_category">
+                  <option value="">Выберите категорию мероприятия</option>
+                </select>
+                <span id="error_category" class="error_msg"></span>
+              </div>
+              <div class="form_group">
+                <label for="modal_subject">Категория тематика</label>
+                <select id="modal_subject" name="modal_subject">
+                  <option value="">Выберите тематику мероприятия</option>
+                </select>
+                <span id="error_subject" class="error_msg"></span>
+              </div>
             </div>
             <div class="form_group">
               <label for="modal_tags">Теги мероприятия</label>
@@ -294,11 +307,15 @@
           <select id="city" name="city">
             <option value="">Все города</option>
           </select>
+          <select id="subject_search" name="subject_search">
+            <option value="">Все тематики</option>
+          </select>
+
           <div class="datepicker_group">
             <svg
               class="datepicker_btn"
               xmlns="http://www.w3.org/2000/svg"
-              width="30"
+              width="20"
               height="30"
               viewBox="0 0 24 24"
             >
@@ -337,6 +354,17 @@
       </div>
     </li> -->
       </ul>
+      <div class="container_ads">
+        <ins
+          class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-1155495613713320"
+          data-ad-slot="9548654289"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        >
+        </ins>
+      </div>
     </div>
     <!-- pagination -->
     <div id="pagination"></div>
@@ -356,9 +384,20 @@
           </svg>
           <div class="logo_title">eventerra</div>
         </div>
+        <div class="btn_report_error">Сообщить об ошибке</div>
       </div>
-      <div class="btn_report_error">Сообщить об ошибке</div>
+      <div class="footer_copyright">
+        <p class="footer_text">&copy; Copyright 2015-2020, event24.org</p>
+        <p class="footer_text">
+          Лучший календарь выставок 2020 по всему миру. Все права защищены.
+          Использование любых материалов сайта возможно только с прямой ссылкой
+          на источник.
+        </p>
+      </div>
     </footer>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
     <script src="js/axios.min.js"></script>
     <script src="js/scripts.min.js"></script>
     <script src="js/modal-window.js"></script>

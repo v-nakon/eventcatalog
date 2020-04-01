@@ -6,6 +6,7 @@ console.log(idEvent);
 axios
   .get("https://eventafisha.com/api/v1/events/" + idEvent)
   .then(function(response) {
+    checkMetaData(response.data);
     document.title = response.data.title;
     setTitle(response.data);
     setDate(response.data);
@@ -24,6 +25,25 @@ axios
   .then(function() {
     // always executed
   });
+function checkMetaData(response) {
+  if (response.seo.meta_title !== null) {
+    setMetaData("title", response.seo.meta_title);
+  } else {
+    setMetaData("title", response.title);
+  }
+  if (response.seo.meta_desc !== null) {
+    setMetaData("description", response.seo.meta_desc);
+  }
+  if (response.seo.meta_keywords !== null) {
+    setMetaData("keywords", response.seo.meta_keywords);
+  }
+}
+function setMetaData(name, data) {
+  let meta = document.createElement("meta");
+  meta.name = name;
+  meta.content = data;
+  document.querySelector("head").appendChild(meta);
+}
 
 function setTitle(obj) {
   let title = obj.title;
@@ -72,7 +92,7 @@ function setDescription(obj) {
   let description = obj.desc;
   let description_first = obj.description_first;
   let description_second = obj.description_second;
-  console.log(description_first + " " + description_second);
+  // console.log(description_first + " " + description_second);
   if (description_first !== null || description_first !== null) {
     let descriptionElement1 = document.querySelector(".description_first");
     descriptionElement1.innerHTML = description_first;
@@ -85,7 +105,7 @@ function setDescription(obj) {
 }
 function setImg(obj) {
   let imgPath = obj.images;
-  console.log("https://eventafisha.com/storage/" + imgPath);
+  // console.log("https://eventafisha.com/storage/" + imgPath);
   let imgElement = document.querySelector(".event_img");
   imgElement.src = "https://eventafisha.com/storage/" + imgPath;
 }
