@@ -387,6 +387,18 @@ footer
 .report_success p, .report_error p
     margin: 0
 // end modal report
+.container_redirect_page
+	height: 100vh
+	display: flex
+	flex-direction: column
+	justify-content: center
+	align-items: center
+.redirect_page_title
+	color: #999
+	font-size: 30px
+	margin-bottom: 40px
+	text-align: center
+// end redirect-page style
 @media (max-width: 1050px)
 	.container_events, .container_ads
 		width: 95%
@@ -422,7 +434,7 @@ footer
 		width: 40%
 	textarea
 		height: 100px
-	.modal_content_moderation, .modal_content_error, .modal_content_notfound
+	.modal_content_moderation, .modal_content_error, .modal_content_notfound, .modal_content_report
 		width: 90%
 	@media (max-width: 576px)
 		.container_events, .container_ads
