@@ -93,14 +93,13 @@ function setDescription(obj) {
   let description_first = obj.description_first;
   let description_second = obj.description_second;
   // console.log(description_first + " " + description_second);
+  let descriptionElement = document.querySelector(".event_description");
+  descriptionElement.innerHTML = description;
   if (description_first !== null || description_first !== null) {
     let descriptionElement1 = document.querySelector(".description_first");
     descriptionElement1.innerHTML = description_first;
     let descriptionElement2 = document.querySelector(".description_second");
     descriptionElement2.innerHTML = description_second;
-  } else {
-    let descriptionElement = document.querySelector(".event_description");
-    descriptionElement.innerHTML = description;
   }
 }
 function setImg(obj) {
