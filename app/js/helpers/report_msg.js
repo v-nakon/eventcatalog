@@ -1,3 +1,5 @@
+import { sentReport } from "./requests.js";
+
 var modalReport = document.querySelector(".container_modal_report");
 var closeModalReport = document.querySelector(".close_modal_report");
 var btnCreateReport = document.querySelector(".btn_report_error");
@@ -21,7 +23,7 @@ document.querySelector("#submit_sent_report").addEventListener("click", function
     let checkEmail = validationEmail(emailOrganaizer);
     let checkText = validationInputText(textOrganaizer);
     if (checkEmail && checkText) {
-        sentReport(emailOrganaizer, isOrganaizer, textOrganaizer);
+        sentReportMsg(emailOrganaizer, isOrganaizer, textOrganaizer);
     }
 });
 function validationEmail(email) {
@@ -45,21 +47,21 @@ function validationInputText(text) {
         return true;
     }
 }
-function sentReport(emailOrganaizer, isOrganaizer, textOrganaizer) {
-    axios.post("https://eventafisha.com/api/v1/error-message", {
+function sentReportMsg(emailOrganaizer, isOrganaizer, textOrganaizer) {
+    let meta = {
         email: emailOrganaizer,
         comment: textOrganaizer,
         is_organizer: isOrganaizer
+    }
+    sentReport(meta).then(response => {
+        document.querySelector(".report_success").style.display = "block";
+        setTimeout(closeReport, 4000);
+    }).catch(error => {
+        document.querySelector(".report_error").style.display = "block";
+        setTimeout(closeReport, 4000);
     })
-        .then(function (response) {
-            document.querySelector(".report_success").style.display = "block";
-            setTimeout(closeReport, 4000);
-        })
-        .catch(function (error) {
-            document.querySelector(".report_error").style.display = "block";
-            setTimeout(closeReport, 4000);
-        });
 }
+
 function closeReport() {
     modalReport.style.display = "none";
     document.querySelector(".report_success").style.display = "none";
