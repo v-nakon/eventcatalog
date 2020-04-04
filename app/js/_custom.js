@@ -1,5 +1,5 @@
 import { addOptionSelect } from "./helpers/help_create_elements.js";
-// import { createEventCard } from "./helpers/help_create_elements.js";
+import { createEventCard } from "./helpers/help_create_elements.js";
 import { getCategories } from "./helpers/requests.js";
 import { getCities } from "./helpers/requests.js";
 import { getSubjects } from "./helpers/requests.js";
@@ -8,7 +8,6 @@ import { addCatToSearch } from "./helpers/category_search_block.js";
 var modalNotFound = document.querySelector(".container_modal_notfound");
 var closeModalNotfound = document.querySelector(".close_modal_notfound");
 var spinner = document.querySelector(".block_spinner");
-// getCities("city");
 getCitiesData();
 getCategoriesData();
 getSubjectsData();
@@ -22,45 +21,6 @@ let btnSearch = document.querySelector(".btn_search");
 btnSearch.addEventListener("click", () =>
   searchEvent("event_name", "city", "subject_search")
 );
-
-function viewEvent(id) {
-  // console.log("ID", id);
-  console.log(window.location.href);
-  let urlEvent = window.location.href + "event-page.html?id=" + id;
-  window.open(urlEvent);
-}
-
-function createEventCard(objItem) {
-  let eventCardElements =
-    `
-	<div class="event_card_content">
-	  <img src="https://eventafisha.com/storage/` +
-    objItem.images +
-    `" alt="" class="event_card_img">
-	  <div class="event_card_title">` +
-    sliceText(objItem.title) +
-    `</div>
-	  <div class="event_card_tag">` +
-    objItem.category.title +
-    `</div>
-	  <div class="event_card_date">` +
-    new Date(objItem.start_date).toLocaleDateString() +
-    `</div>
-	  <div class="event_card_location">` +
-    objItem.address +
-    `</div>
-	  <input class="event_card_btn" type="submit" value="Посмотреть" onclick="viewEvent(` +
-    objItem.id +
-    `)">
-	</div>`;
-  // console.log(test);
-
-  let listEventsElement = document.querySelector(".container_events");
-  let eventCardElement = document.createElement("li");
-  eventCardElement.className = "event_card";
-  eventCardElement.innerHTML = eventCardElements;
-  listEventsElement.append(eventCardElement);
-}
 
 function getCitiesData() {
   getCities()
@@ -234,15 +194,6 @@ export function paginationAjax(
   });
 }
 
-function sliceText(text) {
-  let sliced = text.replace(/<\/?[^>]+>/g, "");
-  sliced = sliced.slice(0, 60);
-  if (sliced.length < text.length) {
-    sliced += "...";
-  }
-  return sliced;
-}
-
 // search datepicker
 let $btn = $(".datepicker_btn"),
   $input = $("#dp"),
@@ -263,3 +214,13 @@ $btn.on("click", function () {
   dp.clear();
   $input.focus();
 });
+
+document.addEventListener("keydown", pushEnterBtn);
+function pushEnterBtn(event) {
+  if (event.which == 13 || event.keyCode == 13) {
+    let getElTag = document.activeElement.tagName;
+    if (getElTag === "INPUT" || getElTag === "SELECT") {
+      searchEvent("event_name", "city", "subject_search");
+    }
+  }
+}

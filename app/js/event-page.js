@@ -1,30 +1,30 @@
+import { getEvent } from "./helpers/requests.js";
+import { orderNumber } from "./helpers/requests.js";
+
 let urlStringParams = window.location.search;
 let urlParams = new URLSearchParams(urlStringParams);
 let idEvent = urlParams.get("id");
-console.log(idEvent);
+getEventData(idEvent);
+function getEventData(idEvent) {
+  getEvent(idEvent)
+    .then((response) => {
+      checkMetaData(response.data);
+      document.title = response.data.title;
+      setTitle(response.data);
+      setDate(response.data);
+      setLocation(response.data);
+      setPrice(response.data);
+      setBuyLink(response.data);
+      setDescription(response.data);
+      setImg(response.data);
+      setCategory(response.data);
+      setPromo(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
 
-axios
-  .get("https://eventafisha.com/api/v1/events/" + idEvent)
-  .then(function(response) {
-    checkMetaData(response.data);
-    document.title = response.data.title;
-    setTitle(response.data);
-    setDate(response.data);
-    setLocation(response.data);
-    setPrice(response.data);
-    setBuyLink(response.data);
-    setDescription(response.data);
-    setImg(response.data);
-    setCategory(response.data);
-    setPromo(response.data);
-  })
-  .catch(function(error) {
-    // handle error
-    console.log(error);
-  })
-  .then(function() {
-    // always executed
-  });
 function checkMetaData(response) {
   if (response.seo.meta_title !== null) {
     setMetaData("title", response.seo.meta_title);
@@ -78,15 +78,25 @@ function setBuyLink(obj) {
   let buyLink = obj.buy_link;
   let price = obj.cost;
   let buyBtn = document.querySelector(".buy_box_btn");
-  let id = obj.id;
-  let redirectLink = "/redirect-page.html?id=" + id;
   if (buyLink === null && price == 0) {
     document.querySelector(".buy_box").classList.add("hide_element");
   } else if (buyLink === null) {
     buyBtn.classList.add("hide_element");
   } else {
-    buyBtn.addEventListener("click", () => window.open(redirectLink));
+    buyBtn.addEventListener("click", function () {
+      setOrderNumber(idEvent);
+    });
   }
+}
+function setOrderNumber(idEvent) {
+  orderNumber(idEvent)
+    .then((response) => {
+      // console.log("Num order", response)
+      goRedirectPage(idEvent);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 function setDescription(obj) {
   let description = obj.desc;
@@ -125,4 +135,8 @@ function setPromo(obj) {
 function renameBtn() {
   let btn = document.querySelector(".buy_box_btn");
   btn.value = "РЕГИСТРАЦИЯ";
+}
+function goRedirectPage(id) {
+  let redirectLink = "/redirect-page.html?id=" + id;
+  document.location.href = redirectLink;
 }
