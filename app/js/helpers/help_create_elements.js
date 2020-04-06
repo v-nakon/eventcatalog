@@ -21,7 +21,7 @@ export function createEventCard(objItem) {
     objItem.category.title +
     `</div>
 	  <div class="event_card_date">` +
-    new Date(objItem.start_date).toLocaleDateString() +
+    setDates(objItem) +
     `</div>
 	  <div class="event_card_location">` +
     checkCity(objItem.city) +
@@ -59,5 +59,14 @@ function checkCity(objCity) {
     return "";
   } else {
     return objCity.title + ", ";
+  }
+}
+function setDates(objItem) {
+  let startDate = new Date(objItem.start_date).toLocaleDateString();
+  let endDate = new Date(objItem.end_date).toLocaleDateString();
+  if (startDate === endDate) {
+    return startDate;
+  } else {
+    return startDate + " - " + endDate;
   }
 }
