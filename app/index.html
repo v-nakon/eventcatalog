@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
 
     <title>eventerra</title>
-    <meta name="description" content="Startup HTML template OptimizedHTML 5" />
 
     <meta name="viewport" content="width=device-width" />
 
@@ -18,10 +17,6 @@
     <script src="js/libs/jquery.min.js"></script>
     <script src="js/libs/pagination.min.js"></script>
     <script src="js/libs/datepicker.js"></script>
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-    ></script>
   </head>
 
   <body>
@@ -151,12 +146,7 @@
             </div>
             <div class="form_group">
               <label for="modal_img">Главная картинка мероприятия</label>
-              <input
-                type="file"
-                id="modal_img"
-                accept="image/*"
-                onchange="getBase64()"
-              />
+              <input type="file" id="modal_img" accept="image/*" />
               <span id="error_img" class="error_msg"></span>
             </div>
             <!-- <div class="form_group">
@@ -354,17 +344,7 @@
       </div>
     </li> -->
       </ul>
-      <div class="container_ads">
-        <ins
-          class="adsbygoogle"
-          style="display: block;"
-          data-ad-client="ca-pub-1155495613713320"
-          data-ad-slot="9548654289"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        >
-        </ins>
-      </div>
+      <div class="container_ads"></div>
     </div>
     <!-- pagination -->
     <div id="pagination"></div>
@@ -387,7 +367,7 @@
         <div class="btn_report_error">Сообщить об ошибке</div>
       </div>
       <div class="footer_copyright">
-        <p class="footer_text">&copy; Copyright 2015-2020, event24.org</p>
+        <p class="footer_text">&copy; Copyright 2015-2020, eventerra.net</p>
         <p class="footer_text">
           Лучший календарь выставок 2020 по всему миру. Все права защищены.
           Использование любых материалов сайта возможно только с прямой ссылкой
@@ -395,9 +375,6 @@
         </p>
       </div>
     </footer>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
     <script src="js/libs/axios.min.js"></script>
     <!-- <script src="js/scripts.min.js"></script> -->
     <script type="module" src="js/_custom.js"></script>
