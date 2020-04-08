@@ -75,11 +75,14 @@ function splitSearchDate(dates) {
     fromDateSearch = dates;
   }
 }
-function searchEvent(titleEl, cityEl, subjectEl) {
+function searchEvent(titleEl, cityEl, subjectEl, searchCityID) {
   nameEventSearch = document.getElementById(titleEl).value;
-  cityEventSearch = document.getElementById(cityEl).value;
+  if (searchCityID === undefined) {
+    cityEventSearch = document.getElementById(cityEl).value;
+  } else {
+    cityEventSearch = searchCityID;
+  }
   subjectSearch = document.getElementById(subjectEl).value;
-  // searchRequest(nameEvent, cityEvent);
   paginationAjax(
     "#pagination",
     nameEventSearch,
@@ -96,10 +99,6 @@ function removeEventList() {
     listEventEl.removeChild(listEventEl.firstChild);
   }
 }
-
-$(function () {
-  paginationAjax("#pagination", "", "", "", "", "", "");
-});
 
 function checkSearchParam(title, city, dateStart, dateEnd, category, subject) {
   let link = "https://eventafisha.com/api/v1/events?paginate=";
@@ -147,7 +146,7 @@ export function paginationAjax(
     locator: "data",
     totalNumberLocator: function (dataSource) {
       // you can return totalNumber by analyzing response content
-      console.log("test", dataSource.total);
+      // console.log("test", dataSource.total);
       return dataSource.total;
     },
     pageSize: 24,
@@ -223,4 +222,18 @@ function pushEnterBtn(event) {
       searchEvent("event_name", "city", "subject_search");
     }
   }
+}
+
+let urlStringParams = window.location.search;
+let urlParams = new URLSearchParams(urlStringParams);
+let categoryIdParam = urlParams.get("cat_id");
+let cityIdParam = urlParams.get("city_id");
+// console.log(cityIdParam);
+if (categoryIdParam !== null) {
+  categorySearch = categoryIdParam;
+  searchEvent("event_name", "city", "subject_search");
+} else if (cityIdParam !== null) {
+  searchEvent("event_name", "city", "subject_search", cityIdParam);
+} else {
+  paginationAjax("#pagination", "", "", "", "", "", "");
 }

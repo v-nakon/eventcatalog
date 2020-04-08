@@ -1,4 +1,3 @@
-
 import { getCategories } from "./requests.js";
 import { getTags } from "./requests.js";
 import { getCities } from "./requests.js";
@@ -8,6 +7,7 @@ import { addOptionSelect } from "./help_create_elements.js";
 
 var modal = document.querySelector(".container_modal");
 var createEventBtn = document.querySelector(".container_create_event");
+var footerCreateEvent = document.querySelector(".footer_create_event");
 var closeModal = document.querySelector(".close_modal");
 var modalModeration = document.querySelector(".container_modal_moderation");
 var modalModerationError = document.querySelector(".container_modal_error");
@@ -43,6 +43,9 @@ getSubjectsData();
 createEventBtn.addEventListener("click", function () {
   modal.style.display = "block";
 });
+footerCreateEvent.addEventListener("click", function () {
+  modal.style.display = "block";
+});
 closeModal.addEventListener("click", function () {
   modal.style.display = "none";
 });
@@ -62,46 +65,54 @@ window.addEventListener("click", function (event) {
     modal.style.display = "none";
   }
 });
-document.querySelector("#modal_img").addEventListener('change', (event) => {
+document.querySelector("#modal_img").addEventListener("change", (event) => {
   getBase64();
 });
 
 function getCategoriesData() {
-  getCategories().then(response => {
-    for (let item in response.data) {
-      addOptionSelect(response.data[item], "modal_category");
-    };
-  }).catch(error => {
-    console.log(error);
-  })
-};
+  getCategories()
+    .then((response) => {
+      for (let item in response.data) {
+        addOptionSelect(response.data[item], "modal_category");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
 function getTagsData() {
-  getTags().then(response => {
-    for (let item in response.data) {
-      addOptionSelect(response.data[item], "modal_tags");
-    };
-  }).catch(error => {
-    console.log(error);
-  })
-};
+  getTags()
+    .then((response) => {
+      for (let item in response.data) {
+        addOptionSelect(response.data[item], "modal_tags");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
 function getCitiesData() {
-  getCities().then(response => {
-    for (let item in response.data) {
-      addOptionSelect(response.data[item], "modal_city");
-    };
-  }).catch(error => {
-    console.log(error);
-  })
-};
+  getCities()
+    .then((response) => {
+      for (let item in response.data) {
+        addOptionSelect(response.data[item], "modal_city");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
 function getSubjectsData() {
-  getSubjects().then(response => {
-    for (let item in response.data) {
-      addOptionSelect(response.data[item], "modal_subject");
-    };
-  }).catch(error => {
-    console.log(error);
-  })
-};
+  getSubjects()
+    .then((response) => {
+      for (let item in response.data) {
+        addOptionSelect(response.data[item], "modal_subject");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
 
 function createEvent() {
   let newStartDate = dateForRequest(startDateEvent);
@@ -122,15 +133,17 @@ function createEvent() {
     image: imgBase64, //file
     organizer_fio: clientName,
     organizer_phone: clientTel,
-    organizer_email: clientEmail
-  }
-  createUserEvent(meta).then(response => {
-    modal.style.display = "none";
-    modalModeration.style.display = "block";
-  }).catch(error => {
-    console.log(error);
-    modalModerationError.style.display = "block";
-  })
+    organizer_email: clientEmail,
+  };
+  createUserEvent(meta)
+    .then((response) => {
+      modal.style.display = "none";
+      modalModeration.style.display = "block";
+    })
+    .catch((error) => {
+      console.log(error);
+      modalModerationError.style.display = "block";
+    });
 }
 function getBase64() {
   let file = document.querySelector("#modal_img").files[0];
@@ -140,9 +153,9 @@ function getBase64() {
     imgBase64 = reader.result;
   };
   reader.onerror = function (error) {
-    console.log('Error: ', error);
+    console.log("Error: ", error);
   };
-};
+}
 function getModalInputs() {
   nameEvent = document.querySelector("#modal_event_name").value;
   priceEvent = document.querySelector("#modal_price").value;
@@ -157,25 +170,30 @@ function getModalInputs() {
   clientEmail = document.querySelector("#modal_client_email").value;
   clientTel = document.querySelector("#modal_client_tel").value;
   for (var i = 0; i < tagsElement.length; i++) {
-    if (tagsElement.options[i].selected) tagsEvent.push(tagsElement.options[i].value);
-  };
+    if (tagsElement.options[i].selected)
+      tagsEvent.push(tagsElement.options[i].value);
+  }
   inputsValidation();
-};
+}
 function validateDate(value) {
   console.log(value);
   var arrD = value.split(".");
   arrD[1] -= 1;
   var d = new Date(arrD[2], arrD[1], arrD[0]);
-  if ((d.getFullYear() == arrD[2]) && (d.getMonth() == arrD[1]) && (d.getDate() == arrD[0])) {
+  if (
+    d.getFullYear() == arrD[2] &&
+    d.getMonth() == arrD[1] &&
+    d.getDate() == arrD[0]
+  ) {
     return true;
   } else {
     return false;
   }
 }
 function dateForRequest(date) {
-  if (date !== '') {
+  if (date !== "") {
     let arr = date.split(".");
-    let newDate = arr[2] + '-' + arr[1] + '-' + arr[0];
+    let newDate = arr[2] + "-" + arr[1] + "-" + arr[0];
     return newDate;
   }
   return date;
@@ -198,105 +216,111 @@ function inputsValidation() {
     errorTitle.innerHTML = 'Поле "Название мероприятия" не должно быть пустым!';
     return;
   } else {
-    errorTitle.innerHTML = '';
+    errorTitle.innerHTML = "";
   }
   if (validateDate(startDateEvent)) {
-    errorStartDate.innerHTML = '';
+    errorStartDate.innerHTML = "";
   } else {
-    errorStartDate.innerHTML = 'Поле "Дата начала мероприятия" пустое или имеет не правильный формат!';
+    errorStartDate.innerHTML =
+      'Поле "Дата начала мероприятия" пустое или имеет не правильный формат!';
     return;
   }
   if (priceEvent === "") {
     errorPrice.innerHTML = 'Поле "Цена мероприятия" не должно быть пустым!';
     return;
   } else {
-    errorPrice.innerHTML = '';
+    errorPrice.innerHTML = "";
   }
   if (categoryEvent === "") {
-    errorCategory.innerHTML = 'Поле "Категория мероприятия" не должно быть пустым!';
+    errorCategory.innerHTML =
+      'Поле "Категория мероприятия" не должно быть пустым!';
     return;
   } else {
-    errorCategory.innerHTML = '';
+    errorCategory.innerHTML = "";
   }
   if (subjectEvent === "") {
-    errorSubject.innerHTML = 'Поле "Тематика мероприятия" не должно быть пустым!';
+    errorSubject.innerHTML =
+      'Поле "Тематика мероприятия" не должно быть пустым!';
     return;
   } else {
-    errorSubject.innerHTML = '';
+    errorSubject.innerHTML = "";
   }
   if (tagsEvent === "") {
     errorTags.innerHTML = 'Поле "Теги мероприятия" не должно быть пустым!';
     return;
   } else {
-    errorTags.innerHTML = '';
+    errorTags.innerHTML = "";
   }
   if (cityEvent === "") {
     errorCity.innerHTML = 'Поле "Город мероприятия" не должно быть пустым!';
     return;
   } else {
-    errorCity.innerHTML = '';
+    errorCity.innerHTML = "";
   }
   if (addressEvent === "") {
     errorAddress.innerHTML = 'Поле "Адрес мероприятия" не должно быть пустым!';
     return;
   } else {
-    errorAddress.innerHTML = '';
+    errorAddress.innerHTML = "";
   }
   if (descEvent === "") {
-    errorDescription.innerHTML = 'Поле "Описание мероприятия" не должно быть пустым!';
+    errorDescription.innerHTML =
+      'Поле "Описание мероприятия" не должно быть пустым!';
     return;
   } else {
-    errorDescription.innerHTML = '';
+    errorDescription.innerHTML = "";
   }
   if (imgBase64 === "") {
-    errorImg.innerHTML = 'Загрузите картинку мероприятия!';
+    errorImg.innerHTML = "Загрузите картинку мероприятия!";
     return;
   } else {
-    errorImg.innerHTML = '';
+    errorImg.innerHTML = "";
   }
   if (urlEvent === "") {
-    errorUrl.innerHTML = 'Поле "Ссылка на покупку билета" не должно быть пустым!';
+    errorUrl.innerHTML =
+      'Поле "Ссылка на покупку билета" не должно быть пустым!';
     return;
   } else {
-    errorUrl.innerHTML = '';
+    errorUrl.innerHTML = "";
   }
   if (clientName === "") {
     errorClientName.innerHTML = 'Поле "Имя" не должно быть пустым!';
     return;
   } else {
-    errorClientName.innerHTML = '';
+    errorClientName.innerHTML = "";
   }
   if (clientEmail === "") {
-    errorClientEmail.innerHTML = 'Поле "Электронная почта" не должно быть пустым!';
+    errorClientEmail.innerHTML =
+      'Поле "Электронная почта" не должно быть пустым!';
     return;
   } else {
-    errorClientEmail.innerHTML = '';
+    errorClientEmail.innerHTML = "";
   }
   createEvent();
-};
+}
 $(function () {
-  $('.datepicker_event_start').datepicker({
+  $(".datepicker_event_start").datepicker({
     onSelect: function (dateText, inst) {
       startDateEvent = dateText;
     },
     minDate: new Date(),
-    autoClose: true
+    autoClose: true,
   });
 });
 
 $(function () {
-  $('.datepicker_event_end').datepicker({
+  $(".datepicker_event_end").datepicker({
     onSelect: function (dateText, inst) {
       endDateEvent = dateText;
     },
     minDate: new Date(),
-    autoClose: true
+    autoClose: true,
   });
 });
-$('.datepicker_time').datepicker({
+$(".datepicker_time").datepicker({
   timepicker: true,
   onlyTimepicker: true,
-  classes: 'only-timepicker',
+  classes: "only-timepicker",
   onSelect: function (dateText, inst) {
     timeEvent = dateText;
   },

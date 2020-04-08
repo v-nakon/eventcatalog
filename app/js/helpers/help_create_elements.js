@@ -41,7 +41,7 @@ export function createEventCard(objItem) {
 function addEventToEl(element, id) {
   let btnEl = element.querySelector(".event_card_btn");
   btnEl.addEventListener("click", function () {
-    let urlEvent = window.location.href + "event-page.html?id=" + id;
+    let urlEvent = window.location.origin + "/event-page.html?id=" + id;
     window.open(urlEvent);
   });
 }

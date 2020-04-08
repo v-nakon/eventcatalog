@@ -172,16 +172,47 @@ ul, li
 	margin-top: 40px
 footer
 	background-color: #ACEBDB
+	width: 100%
 .container_footer
+	width: 1024px
+	margin: auto
+footer a
+	text-decoration: none !important
+	color: transparent !important
+.footer_logo_icons
+	@include flex-center
+.footer_icon
+	margin: 0 3px
+.footer_text_blocks
 	display: flex
 	justify-content: space-evenly
-	align-items: center
+	margin: 20px 0
+.footer_text_block, .footer_text_block hr
+	width: 220px
+	color: #000000
+	font-size: 12px
+	display: flex
+	flex-direction: column
+.footer_text_block a
+	color: #000000 !important
+.footer_text_block .title
+	text-transform: uppercase
+	font-size: 13px
+.footer_text_block .text
+	font-size: 12px
+	padding: 4px 0
+	cursor: pointer
+.footer_text_block .text:hover
+	color: #696A6A !important
 .footer_text
-    font-size: 12px
-    margin: 0 auto
-    text-align: center
-.footer_copyright
-    padding-bottom: 10px
+	color: #000000
+	font-size: 12px
+	text-align: center
+.footer_text_copy
+	color: #000000
+	font-size: 16px
+	text-align: center
+	padding: 10px 0
 #pagination
     display: flex
     justify-content: center
@@ -368,11 +399,7 @@ footer
         transform: rotate(0deg)
     100%
         transform: rotate(360deg)
-// start block spinner
-.btn_report_error
-	font-size: 13px
-	font-weight: 600
-	cursor: pointer
+// end block spinner
 // start modal report
 .report_label span 
     color: red
@@ -412,7 +439,7 @@ footer
 	.container_search
 		width: 100%
 		margin: auto 20px
-	.container_header
+	.container_header, .container_footer
 		width: 90%
 @media (max-width: 768px)
 	.search_title
@@ -437,6 +464,12 @@ footer
 		height: 100px
 	.modal_content_moderation, .modal_content_error, .modal_content_notfound, .modal_content_report
 		width: 90%
+	.footer_text_blocks
+		flex-direction: column
+		margin: 0
+		align-items: center
+	.footer_text_block
+		margin: 10px 0
 	@media (max-width: 576px)
 		.container_events, .container_ads
 			flex-direction: column
