@@ -337,7 +337,7 @@ footer a
 .dropdown_content
 	display: none
 	position: absolute
-	right: -325px
+	right: -180px
 	top: 30px
 	background-color: #fff
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2)
@@ -470,41 +470,48 @@ footer a
 		align-items: center
 	.footer_text_block
 		margin: 10px 0
-	@media (max-width: 576px)
-		.container_events, .container_ads
-			flex-direction: column
-			width: 80%
-		.event_card
-			width: 100%
-		.create_event_text
-			display: none
-		.container_header
-			height: 50px
-		.logo_icon, .create_event_icon
-			width: 20px
-		.logo_title
-			font-size: 20px
-		.container_category
-		    display: flex
-		    width: 280px
-		    flex-direction: row
-		    flex-wrap: wrap
-		.item_category
-		    font-size: 12px
-		    padding: 8px 12px
-		    min-width: 110px
-		.dropdown_content
-			right: -120px
-		.event_card_img
-			max-width: 200px
-			margin: auto
-		.block_spinner
-			left: calc( 50% -  1.5em)
-		.spinner
-			width: 2.5rem
-			height: 2.5rem
-			border-width: 2px
-		.blocks_group
-			flex-direction: column
-		.blocks_group .form_group
-			width: 100%
+
+@media (max-width: 576px)
+	.container_events, .container_ads
+		flex-direction: column
+		width: 80%
+	.event_card
+		width: 100%
+	.create_event_text
+		display: none
+	.container_header
+		height: 50px
+	.logo_icon, .create_event_icon
+		width: 20px
+	.logo_title
+		font-size: 20px
+	.container_category
+	    display: flex
+	    width: 280px
+	    flex-direction: row
+	    flex-wrap: wrap
+	.item_category
+	    font-size: 12px
+	    padding: 8px 12px
+	    min-width: 110px
+	.dropdown_content
+		right: -20px
+	.event_card_img
+		max-width: 200px
+		margin: auto
+	.block_spinner
+		left: calc( 50% -  1.5em)
+	.spinner
+		width: 2.5rem
+		height: 2.5rem
+		border-width: 2px
+	.blocks_group
+		flex-direction: column
+	.blocks_group .form_group
+		width: 100%
+@media (max-width: 391px)
+	.dropdown_content
+		right: -280px
+@media (max-width: 371px)
+	.dropdown_content
+		right: -180px
