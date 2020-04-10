@@ -10,10 +10,15 @@ export function addOptionSelect(item, elementSelect) {
 export function createEventCard(objItem) {
   let eventCardElements =
     `
-	<div class="event_card_content">
+  <div class="event_card_content">
+  <a href="event-page.html?id=` +
+    objItem.id +
+    `" target="_blank">  
+  <div class="block_event_img">
 	  <img src="https://eventafisha.com/storage/` +
     objItem.images +
-    `" alt="" class="event_card_img">
+    `" alt="" class="event_card_img"> 
+    </div> </a>
 	  <div class="event_card_title">` +
     sliceText(objItem.title) +
     `</div>
