@@ -8,7 +8,6 @@ getEventData(idEvent);
 function getEventData(idEvent) {
   getEvent(idEvent)
     .then((response) => {
-      console.log(response);
       checkMetaData(response.data);
       document.title = response.data.title;
       setTitle(response.data);
