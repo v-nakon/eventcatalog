@@ -8,6 +8,7 @@ getEventData(idEvent);
 function getEventData(idEvent) {
   getEvent(idEvent)
     .then((response) => {
+      console.log(response);
       checkMetaData(response.data);
       document.title = response.data.title;
       setTitle(response.data);
@@ -19,6 +20,7 @@ function getEventData(idEvent) {
       setImg(response.data);
       setCategory(response.data);
       setPromo(response.data);
+      setSocialLink(response.data);
     })
     .catch((error) => {
       console.log(error);
@@ -153,4 +155,17 @@ function renameBtn() {
 function goRedirectPage(id) {
   let redirectLink = "/redirect-page.html?id=" + id;
   document.location.href = redirectLink;
+}
+
+function setSocialLink(obj) {
+  let facebookEl = document.querySelector(".facebook");
+  let instagramEl = document.querySelector(".instagram");
+  if (obj.facebook_link !== null) {
+    facebookEl.href = obj.facebook_link;
+    facebookEl.classList.remove("hide_element");
+  }
+  if (obj.instagram_link !== null) {
+    instagramEl.href = obj.instagram_link;
+    instagramEl.classList.remove("hide_element");
+  }
 }
